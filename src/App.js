@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { csv } from "d3-fetch";
-import issues from "./data/issues.csv";
+import React, { useState } from "react";
 import Button from "./components/button";
 
 //const Button = () => <button class="pure-button">A Pure Button</button>
@@ -9,7 +7,7 @@ const App = ({ dataCsv }) => {
   const [data, setData] = useState(dataCsv);
   return (
     <div>
-      <Button>hi</Button>
+      <Button>Pure Button</Button>
     </div>
   );
 };
