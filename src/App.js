@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import Button from "./components/button";
+import css from './style/title.css'
 
-//const Button = () => <button class="pure-button">A Pure Button</button>
+const Title = () => (
+  <header>
+    <h1>UK Library Issues</h1>
+  </header>
+);
 
 const App = ({ dataCsv }) => {
   const [data, setData] = useState(dataCsv);
   return (
     <div>
-      <Button>Pure Button</Button>
+      <Title />
     </div>
   );
 };
