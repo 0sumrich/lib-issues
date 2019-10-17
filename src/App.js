@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import * as d3 from "d3-fetch";
+import {csv} from "d3-fetch";
+import issues from './data/issues.csv'
 
 const App = () => {
   
@@ -7,9 +8,9 @@ const App = () => {
   
   useEffect(() => {
     const fetchData = async () => {
-      const result = await d3.csv("./data/issues.csv");
+      const res = await csv(issues);
       debugger;
-      setData(result);
+      setData(res);
     };
     fetchData();
   }, []);
