@@ -4,7 +4,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import issues from "./data/issues.csv";
 import { csv } from "d3-fetch";
-import './style/pure-min.css'
+//import './style/pure-min.css'
 
 const render = async () => {
   const data = await csv(issues);

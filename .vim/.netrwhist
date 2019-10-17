@@ -1,0 +1,3 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/rbd/pnpm-volume/2554f071-d877-43b3-9ace-a793d720d20e/node_modules/purecss'
