@@ -1,9 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
 import draw from "../helper/draw";
 import Svg from "./svg";
-import { getUniqueValues } from "../helper/getUniqueValues";
+import { unique, getUniqueValues } from "../helper/getUniqueValues";
 import Select from "./select";
-
+import {nest} from 'd3';
 // Data object keys from csv
 // Local authority,
 // Site of loan,
@@ -18,7 +18,13 @@ import Select from "./select";
 const filterByDate = (arr, start, end) =>
   arr.filter(o => o["Count start"] === start && o["Count end"] === end);
 
-const sumAll = arr => {};
+const sumAll = arr => {
+  return nest()
+  .key(d => d['Site of loan'])
+  .rollup(d => d['Issues'])
+  .entries(arr)
+  
+};
 
 const Chart = ({ data }) => {
   const [drawData, setData] = useState(data);
@@ -28,8 +34,10 @@ const Chart = ({ data }) => {
   useEffect(() => {
     const start = uniqueValues["Count start"][0];
     const end = uniqueValues["Count end"][0];
-
-    draw(filterByDate(drawData, start, end));
+    const filtered = filterByDate(drawData, start, end)
+    const summed = sumAll(filtered)
+    debugger;
+    draw(summed);
   });
 
   return (
