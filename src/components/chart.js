@@ -17,7 +17,6 @@ import Select from "./select";
 
 const Chart = ({ data }) => {
   const [drawData, setData] = useState(data);
-  debugger;
   const uniqueValues = getUniqueValues(drawData);
   return (
     <Fragment>
