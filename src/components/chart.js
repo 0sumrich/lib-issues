@@ -21,7 +21,7 @@ const Chart = ({ data }) => {
   const uniqueValues = getUniqueValues(drawData);
   return (
     <Fragment>
-      <Select options={uniqueValues["Site of Loan"]} />
+      <Select options={uniqueValues["Site of loan"]} />
       <Svg id="chart" />
     </Fragment>
   );
