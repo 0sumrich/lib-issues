@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 // Data object keys from csv
 // Local authority,
@@ -9,10 +9,16 @@ import React from 'react'
 // Book,
 // Issues
 
+const getUnique = arr => [...new Set(arr)];
+Array.prototype.unique = () => getUnique(this);
+const getColumn = (colName, dataArr) => dataArr.map(o => o[colName]);
 
+// let unique = [...new Set(myArray)];
 
-const Chart = ({data}) => {
-  return <svg></svg>
-}
+const Chart = ({ data }) => {
+  const authorityNames = getColumn("Local authority", data)//.unique();
+  debugger;
+  return <svg></svg>;
+};
 
-export default Chart
+export default Chart;
