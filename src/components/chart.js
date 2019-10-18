@@ -15,13 +15,17 @@ import Select from "./select";
 
 //total loans by site
 
+const filterByDate = (arr, start, end) => arr.filter(o => o['Count start']===start && o['Count end']===end)
+
 const Chart = ({ data }) => {
   const [drawData, setData] = useState(data);
   const uniqueValues = getUniqueValues(drawData);
   const siteOfLoans = ['All', ...uniqueValues["Site of loan"]]
   
   useEffect(() => {
-		draw(drawData)
+    const start = uniqueValues['Count start'][0]
+    const end = uniqueValues['Count end'][0]
+		draw(filterByDate(drawData, start, end))
 	})
   
   return (
