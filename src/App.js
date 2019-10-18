@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Chart from "./components/chart";
 import "./style/title.css";
 
@@ -10,10 +10,12 @@ const Title = () => (
 
 const App = ({ data }) => {
   return (
-    <div>
+    <Fragment>
       <Title />
-      <Chart data={data} />
-    </div>
+      <main>
+        <Chart data={data} />
+      </main>
+    </Fragment>
   );
 };
 
