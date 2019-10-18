@@ -12,15 +12,15 @@ import Select from "./select";
 // Book,
 // Issues
 
-// let unique = [...new Set(myArray)];
 //total loans by site
 
 const Chart = ({ data }) => {
   const [drawData, setData] = useState(data);
   const uniqueValues = getUniqueValues(drawData);
+  const siteOfLoans = ['All', ...uniqueValues["Site of loan"]]
   return (
     <Fragment>
-      <Select options={uniqueValues["Site of loan"]} />
+      <Select options={siteOfLoans} multiple/>
       <Svg id="chart" />
     </Fragment>
   );

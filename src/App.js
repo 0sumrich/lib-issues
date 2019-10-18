@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "./components/button";
 import Chart from "./components/chart";
-import css from "./style/title.css";
+import "./style/title.css";
 
 const Title = () => (
   <header>
