@@ -8,7 +8,7 @@ import 'purecss'
 
 const render = async () => {
   const data = await csv(issues);
-  ReactDOM.render(<App dataCsv={data} />, document.getElementById("root"));
+  ReactDOM.render(<App data={data} />, document.getElementById("root"));
 };
 
 render();

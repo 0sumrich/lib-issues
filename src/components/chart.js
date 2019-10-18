@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from "react";
-import Svg from './svg'
-import getUniqueValues from '../helper/getUniqueValues'
+import React, { Fragment, useState, useEffect } from "react";
+import Svg from "./svg";
+import getUniqueValues from "../helper/getUniqueValues";
+import Select from "./select";
 
 // Data object keys from csv
 // Local authority,
@@ -15,9 +16,15 @@ import getUniqueValues from '../helper/getUniqueValues'
 //total loans by site
 
 const Chart = ({ data }) => {
-  const [drawData, setData] = useState(drawData)
+  const [drawData, setData] = useState(data);
+  debugger;
   const uniqueValues = getUniqueValues(drawData);
-  return <Svg id='chart'/>
+  return (
+    <Fragment>
+      <Select options={uniqueValues["Site of Loan"]} />
+      <Svg id="chart" />
+    </Fragment>
+  );
 };
 
 export default Chart;
