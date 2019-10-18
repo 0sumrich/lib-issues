@@ -3,7 +3,7 @@ import draw from "../helper/draw";
 import Svg from "./svg";
 import { unique, getUniqueValues } from "../helper/getUniqueValues";
 import Select from "./select";
-import {nest} from 'd3';
+import { nest, sum } from "d3";
 // Data object keys from csv
 // Local authority,
 // Site of loan,
@@ -20,10 +20,12 @@ const filterByDate = (arr, start, end) =>
 
 const sumAll = arr => {
   return nest()
-  .key(d => d['Site of loan'])
-  .rollup(d => d['Issues'])
-  .entries(arr)
-  
+    .key(d => d["Site of loan"])
+    .rollup(d => sum(d.map(o => o["Issues"])))
+    .entries(arr)
+    .map(o => {
+    return {'Site of loan': o.key, 'Issues': o.value}
+  });
 };
 
 const Chart = ({ data }) => {
@@ -34,8 +36,8 @@ const Chart = ({ data }) => {
   useEffect(() => {
     const start = uniqueValues["Count start"][0];
     const end = uniqueValues["Count end"][0];
-    const filtered = filterByDate(drawData, start, end)
-    const summed = sumAll(filtered)
+    const filtered = filterByDate(drawData, start, end);
+    const summed = sumAll(filtered);
     debugger;
     draw(summed);
   });
