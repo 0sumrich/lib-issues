@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "./components/button";
-import css from './style/title.css'
+import Chart from "./components/chart";
+import css from "./style/title.css";
 
 const Title = () => (
   <header>
@@ -10,9 +11,11 @@ const Title = () => (
 
 const App = ({ dataCsv }) => {
   const [data, setData] = useState(dataCsv);
+
   return (
     <div>
       <Title />
+      <Chart data={data} />
     </div>
   );
 };
