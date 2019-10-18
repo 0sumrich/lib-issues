@@ -9,9 +9,7 @@ const Title = () => (
   </header>
 );
 
-const App = ({ dataCsv }) => {
-  const [data, setData] = useState(dataCsv);
-
+const App = ({ data }) => {
   return (
     <div>
       <Title />

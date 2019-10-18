@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import Svg from './svg'
 import getUniqueValues from '../helper/getUniqueValues'
 
 // Data object keys from csv
@@ -11,11 +12,12 @@ import getUniqueValues from '../helper/getUniqueValues'
 // Issues
 
 // let unique = [...new Set(myArray)];
+//total loans by site
 
 const Chart = ({ data }) => {
-  const uniqueValues = getUniqueValues(data);
-  debugger;
-  return <svg></svg>;
+  const [drawData, setData] = useState(drawData)
+  const uniqueValues = getUniqueValues(drawData);
+  return <Svg id='chart'/>
 };
 
 export default Chart;
