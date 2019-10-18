@@ -1,10 +1,11 @@
 import React from "react";
+import "../style/select.css";
 
 const Option = ({ children }) => <option>{children}</option>;
 
 export default ({ options, id, multiple }) => (
   <div className="pure-form">
-    <select id={id} className="pure-input-1-2" multiple={multiple}>
+    <select id={id} className="pure-input-1-2 select" multiple={multiple}>
       {options.map(option => (
         <Option key={option}>{option}</Option>
       ))}
