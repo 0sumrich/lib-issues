@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
+import draw from '../helper/draw'
 import Svg from "./svg";
 import getUniqueValues from "../helper/getUniqueValues";
 import Select from "./select";
@@ -18,6 +19,11 @@ const Chart = ({ data }) => {
   const [drawData, setData] = useState(data);
   const uniqueValues = getUniqueValues(drawData);
   const siteOfLoans = ['All', ...uniqueValues["Site of loan"]]
+  
+  useEffect(() => {
+		draw(drawData)
+	})
+  
   return (
     <Fragment>
       <Select options={siteOfLoans} multiple/>

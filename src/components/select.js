@@ -1,5 +1,4 @@
 import React from "react";
-import "../style/select.css";
 
 const Option = ({ children }) => <option>{children}</option>;
 

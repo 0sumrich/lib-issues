@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Button from "./components/button";
+import React from "react";
 import Chart from "./components/chart";
 import "./style/title.css";
 
