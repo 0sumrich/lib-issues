@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
-import draw from '../helper/draw'
+import draw from "../helper/draw";
 import Svg from "./svg";
-import getUniqueValues from "../helper/getUniqueValues";
+import { getUniqueValues } from "../helper/getUniqueValues";
 import Select from "./select";
 
 // Data object keys from csv
@@ -15,27 +15,26 @@ import Select from "./select";
 
 //total loans by site
 
-const filterByDate = (arr, start, end) => arr.filter(o => o['Count start']===start && o['Count end']===end)
+const filterByDate = (arr, start, end) =>
+  arr.filter(o => o["Count start"] === start && o["Count end"] === end);
 
-const sumAll = (arr) => {
-  
-}
+const sumAll = arr => {};
 
 const Chart = ({ data }) => {
   const [drawData, setData] = useState(data);
   const uniqueValues = getUniqueValues(drawData);
-  const siteOfLoans = ['All', ...uniqueValues["Site of loan"]]
-  
+  const siteOfLoans = ["All", ...uniqueValues["Site of loan"]];
+
   useEffect(() => {
-    const start = uniqueValues['Count start'][0]
-    const end = uniqueValues['Count end'][0];
-    
-		draw(filterByDate(drawData, start, end))
-	})
-  
+    const start = uniqueValues["Count start"][0];
+    const end = uniqueValues["Count end"][0];
+
+    draw(filterByDate(drawData, start, end));
+  });
+
   return (
     <Fragment>
-      <Select options={siteOfLoans} multiple/>
+      <Select options={siteOfLoans} multiple />
       <Svg id="chart" />
     </Fragment>
   );

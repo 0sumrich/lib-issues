@@ -4,7 +4,7 @@ const unique = (str, data) => getUnique(getColumn(str, data));
 const columns = data => Object.keys(data[0]);
 const getUniqueValues = data => {
   const res = {};
-  columns.forEach(col => {
+  columns(data).forEach(col => {
     res[col] = unique(col, data);
   });
   return res;
