@@ -4,11 +4,13 @@ function draw(data) {
   const margin = { top: 30, right: 50, bottom: 60, left: 70 };
   const width = 950 - margin.left - margin.right;
   const height = 600 - margin.top - margin.bottom;
-  const colours = d3.schemeSet3()
+  const colours = d3.schemeSet3
+  
   const x = d3
     .scaleBand()
     .range([0, width])
-    .domain(data.map(o => o["Site of loan"]));
+    .domain(data.map(o => o["Site of loan"]))
+    .padding(0.1);
   const y = d3
     .scaleLinear()
     .range([height, 0])
@@ -30,7 +32,8 @@ function draw(data) {
     .attr("x", d => x(d["Site of loan"]))
     .attr("width", x.bandwidth())
     .attr("y", d => y(d.Issues))
-    .attr("height", d => height - y(d.Issues));
+    .attr("height", d => height - y(d.Issues))
+    .style('fill', (d, i) => colours[i%colours.length]);
 
   // add the x Axis
   chart
@@ -38,10 +41,8 @@ function draw(data) {
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x));
 
-  // add the y Axis
   chart.append("g").call(d3.axisLeft(y));
 
-  // 	chart.call(tip);
 }
 
 export default draw;
