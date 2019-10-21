@@ -4,6 +4,7 @@ import Svg from "./svg";
 import { unique, getUniqueValues } from "../helper/getUniqueValues";
 import Select from "./select";
 import { nest, sum } from "d3";
+import "../style/chart.css";
 // Data object keys from csv
 // Local authority,
 // Site of loan,
@@ -24,8 +25,8 @@ const sumAll = arr => {
     .rollup(d => sum(d.map(o => o["Issues"])))
     .entries(arr)
     .map(o => {
-    return {'Site of loan': o.key, 'Issues': o.value}
-  });
+      return { "Site of loan": o.key, Issues: o.value };
+    });
 };
 
 const Chart = ({ data }) => {
@@ -42,7 +43,7 @@ const Chart = ({ data }) => {
   });
 
   return (
-    <div id='chart-wrapper'>
+    <div className="chart-wrapper">
       <Select options={siteOfLoans} multiple />
       <Svg id="chart" />
     </div>
