@@ -1,8 +1,8 @@
 import * as d3 from "d3";
 
 function draw(data) {
-  const margin = { top: 30, right: 50, bottom: 60, left: 70 };
-  const width = 950 - margin.left - margin.right;
+  const margin = { top: 30, right: 30, bottom: 30, left: 40 };
+  const width = 974 - margin.left - margin.right;
   const height = 600 - margin.top - margin.bottom;
   const colours = d3.schemeCategory10;
 
@@ -63,9 +63,10 @@ function draw(data) {
             .attr("x", 0)
             .attr("y", y)
             .attr("dy", dy + "em");
-          while (words.pop()) {
+          while (word=words.pop()) {
             line.push(word);
             tspan.text(line.join(" "));
+            debugger;
             if (tspan.node().getComputedTextLength() > width) {
               line.pop();
               tspan.text(line.join(" "));
