@@ -4,7 +4,7 @@ function draw(data) {
   const margin = { top: 30, right: 50, bottom: 60, left: 70 };
   const width = 950 - margin.left - margin.right;
   const height = 600 - margin.top - margin.bottom;
-  const colours = d3.schemeSet3
+  const colours = d3.schemeCategory10
   
   const x = d3
     .scaleBand()
@@ -38,7 +38,7 @@ function draw(data) {
   // add the x Axis
   chart
     .append("g")
-    .attr("transform", "translate(0," + height + ")")
+    .attr("transform", `translate(0, ${height})`)
     .call(d3.axisBottom(x));
 
   chart.append("g").call(d3.axisLeft(y));
