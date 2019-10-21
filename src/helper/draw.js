@@ -4,8 +4,8 @@ function draw(data) {
   const margin = { top: 30, right: 50, bottom: 60, left: 70 };
   const width = 950 - margin.left - margin.right;
   const height = 600 - margin.top - margin.bottom;
-  const colours = d3.schemeCategory10
-  
+  const colours = d3.schemeCategory10;
+
   const x = d3
     .scaleBand()
     .range([0, width])
@@ -33,16 +33,50 @@ function draw(data) {
     .attr("width", x.bandwidth())
     .attr("y", d => y(d.Issues))
     .attr("height", d => height - y(d.Issues))
-    .style('fill', (d, i) => colours[i%colours.length]);
+    .style("fill", (d, i) => colours[i % colours.length]);
 
   // add the x Axis
   chart
     .append("g")
     .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(x));
+    .call(d3.axisBottom(x))
+    .each(function() {
+      const text = d3.select(this);
+      const words = text
+        .text()
+        .split(/\s+/)
+        .reverse();
+      const width = x.bandwitdh();
+      let word = "";
+      let line = [];
+      let lineNumber = 0;
+      const lineHeight = 1.1; // ems
+      const y = text.attr("y");
+      const dy = parseFloat(text.attr("dy"));
+      const tspan = text
+        .text(null)
+        .append("tspan")
+        .attr("x", 0)
+        .attr("y", y)
+        .attr("dy", dy + "em");
+      while ((word = words.pop())) {
+        line.push(word);
+        tspan.text(line.join(" "));
+        if (tspan.node().getComputedTextLength() > width) {
+          line.pop();
+          tspan.text(line.join(" "));
+          line = [word];
+          tspan = text
+            .append("tspan")
+            .attr("x", 0)
+            .attr("y", y)
+            .attr("dy", ++lineNumber * lineHeight + dy + "em")
+            .text(word);
+        }
+      }
+    });
 
   chart.append("g").call(d3.axisLeft(y));
-
 }
 
 export default draw;
