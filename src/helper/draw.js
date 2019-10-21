@@ -1,8 +1,6 @@
 import * as d3 from "d3";
 import { textwrap } from "d3-textwrap";
 
-
-
 function draw(data) {
   const margin = { top: 30, right: 30, bottom: 50, left: 40 };
   const width = 1000 - margin.left - margin.right;
@@ -18,14 +16,10 @@ function draw(data) {
     .scaleLinear()
     .range([height, 0])
     .domain([0, d3.max(data.map(o => o.Issues))]);
-  
+
   const wrap = textwrap()
-    // wrap to 480 x 960 pixels
-    .bounds({height: 0, width: x.bandwidth()})
-    .method('tspans')
-    // pad by an additional 10 pixels
-    //.padding(1);
-  
+    .bounds({height: height, width: x.bandwidth()})
+    .method('tspans');
 
   const chart = d3
     .select("#chart")
@@ -55,42 +49,44 @@ function draw(data) {
       const text = d3
         .select(this)
         .selectAll(".tick text")
-        .call(wrap)
-        // .each(function() {
-        //   const text = d3.select(this);
-        //   const words = text
-        //     .text()
-        //     .split(/\s+/)
-        //     .reverse();
-        //   const width = x.bandwidth() - 10;
-        //   let word = "";
-        //   let line = [];
-        //   let lineNumber = 0;
-        //   const lineHeight = 1.1; // ems
-        //   const y = text.attr("y");
-        //   const dy = +text.attr("dy").slice(0, -3);
-        //   let tspan = text
-        //     .text(null)
-        //     .append("tspan")
-        //     .attr("x", 0)
-        //     .attr("y", y)
-        //     .attr("dy", dy + "em");
-        //   while ((word = words.pop())) {
-        //     line.push(word);
-        //     tspan.text(line.join(" "));
-        //     if (tspan.node().getComputedTextLength() > width) {
-        //       line.pop();
-        //       tspan.text(line.join(" "));
-        //       line = [word];
-        //       tspan = text
-        //         .append("tspan")
-        //         .attr("x", 0)
-        //         .attr("y", y)
-        //         .attr("dy", ++lineNumber * lineHeight + dy + "em")
-        //         .text(word);
-        //     }
-        //   }
-        // });
+        .call(wrap);
+    
+    text.attr('y', '1.5em')
+      // .each(function() {
+      //   const text = d3.select(this);
+      //   const words = text
+      //     .text()
+      //     .split(/\s+/)
+      //     .reverse();
+      //   const width = x.bandwidth() - 10;
+      //   let word = "";
+      //   let line = [];
+      //   let lineNumber = 0;
+      //   const lineHeight = 1.1; // ems
+      //   const y = text.attr("y");
+      //   const dy = +text.attr("dy").slice(0, -3);
+      //   let tspan = text
+      //     .text(null)
+      //     .append("tspan")
+      //     .attr("x", 0)
+      //     .attr("y", y)
+      //     .attr("dy", dy + "em");
+      //   while ((word = words.pop())) {
+      //     line.push(word);
+      //     tspan.text(line.join(" "));
+      //     if (tspan.node().getComputedTextLength() > width) {
+      //       line.pop();
+      //       tspan.text(line.join(" "));
+      //       line = [word];
+      //       tspan = text
+      //         .append("tspan")
+      //         .attr("x", 0)
+      //         .attr("y", y)
+      //         .attr("dy", ++lineNumber * lineHeight + dy + "em")
+      //         .text(word);
+      //     }
+      //   }
+      // });
     });
 
   chart.append("g").call(d3.axisLeft(y));
