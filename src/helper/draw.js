@@ -21,9 +21,11 @@ function draw(data) {
   
   const wrap = textwrap()
     // wrap to 480 x 960 pixels
-    .bounds({height: margin.bottom-5, width: x.bandwidth()-5})
+    .bounds({height: 0, width: x.bandwidth()})
+    .method('tspans')
     // pad by an additional 10 pixels
-    .padding(1);
+    //.padding(1);
+  
 
   const chart = d3
     .select("#chart")
