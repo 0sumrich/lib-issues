@@ -50,7 +50,7 @@ function draw(data) {
             .text()
             .split(/\s+/)
             .reverse();
-          const width = x.bandwidth();
+          const width = x.bandwidth()-10;
           let word = "";
           let line = [];
           let lineNumber = 0;

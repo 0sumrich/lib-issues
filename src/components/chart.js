@@ -42,10 +42,10 @@ const Chart = ({ data }) => {
   });
 
   return (
-    <Fragment>
+    <div id='chart-wrapper'>
       <Select options={siteOfLoans} multiple />
       <Svg id="chart" />
-    </Fragment>
+    </div>
   );
 };
 
