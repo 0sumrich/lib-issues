@@ -41,40 +41,44 @@ function draw(data) {
     .attr("transform", `translate(0, ${height})`)
     .call(d3.axisBottom(x))
     .each(function() {
-      const text = d3.select(this);
-    debugger;
-      const words = text
-        .text()
-        .split(/\s+/)
-        .reverse();
-      const width = x.bandwidth();
-      let word = "";
-      let line = [];
-      let lineNumber = 0;
-      const lineHeight = 1.1; // ems
-      const y = text.attr("y");
-      const dy = +text.attr("dy");
-      let tspan = text
-        .text(null)
-        .append("tspan")
-        .attr("x", 0)
-        .attr("y", y)
-        .attr("dy", dy + "em");
-      while ((word === words.pop())) {
-        line.push(word);
-        tspan.text(line.join(" "));
-        if (tspan.node().getComputedTextLength() > width) {
-          line.pop();
-          tspan.text(line.join(" "));
-          line = [word];
-          tspan = text
+      const text = d3
+        .select(this)
+        .selectAll(".tick text")
+        .each(function() {
+          debugger;
+          const words = text
+            .text()
+            .split(/\s+/)
+            .reverse();
+          const width = x.bandwidth();
+          let word = "";
+          let line = [];
+          let lineNumber = 0;
+          const lineHeight = 1.1; // ems
+          const y = text.attr("y");
+          const dy = +text.attr("dy");
+          let tspan = text
+            .text(null)
             .append("tspan")
             .attr("x", 0)
             .attr("y", y)
-            .attr("dy", ++lineNumber * lineHeight + dy + "em")
-            .text(word);
-        }
-      }
+            .attr("dy", dy + "em");
+          while (word === words.pop()) {
+            line.push(word);
+            tspan.text(line.join(" "));
+            if (tspan.node().getComputedTextLength() > width) {
+              line.pop();
+              tspan.text(line.join(" "));
+              line = [word];
+              tspan = text
+                .append("tspan")
+                .attr("x", 0)
+                .attr("y", y)
+                .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                .text(word);
+            }
+          }
+        });
     });
 
   chart.append("g").call(d3.axisLeft(y));
