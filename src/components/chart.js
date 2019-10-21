@@ -38,7 +38,6 @@ const Chart = ({ data }) => {
     const end = uniqueValues["Count end"][0];
     const filtered = filterByDate(drawData, start, end);
     const summed = sumAll(filtered);
-    debugger;
     draw(summed);
   });
 
