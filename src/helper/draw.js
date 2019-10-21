@@ -1,8 +1,8 @@
 import * as d3 from "d3";
 
 function draw(data) {
-  const margin = { top: 30, right: 30, bottom: 30, left: 40 };
-  const width = 974 - margin.left - margin.right;
+  const margin = { top: 30, right: 30, bottom: 50, left: 40 };
+  const width = 1000 - margin.left - margin.right;
   const height = 600 - margin.top - margin.bottom;
   const colours = d3.schemeCategory10;
 
