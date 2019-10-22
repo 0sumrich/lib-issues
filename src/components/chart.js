@@ -5,6 +5,7 @@ import { unique, getUniqueValues } from "../helper/getUniqueValues";
 import Select from "./select";
 import { nest, sum } from "d3";
 import "../style/chart.css";
+
 // Data object keys from csv
 // Local authority,
 // Site of loan,
