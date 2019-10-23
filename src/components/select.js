@@ -24,7 +24,8 @@ export default ({ options, id }) => {
     <div className="select-wrapper">
       <ReactMultiSelectCheckboxes
         options={optionsArray}
-        className="react-select"
+        classNamePrefix="select"
+        className="container"
       />
     </div>
   );

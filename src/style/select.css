@@ -1,6 +1,4 @@
-.select-wrapper {
-  width: 100%;
-}
-.react-select {
+.select-wrapper:first-child {
   margin: auto;
+  text-align: center !important;
 }
