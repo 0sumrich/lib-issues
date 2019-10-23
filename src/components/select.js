@@ -13,16 +13,15 @@
 // );
 import React from "react";
 import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
-import "../style/select.css";
 
 const createOptions = (label, value) => {
   return { label, value };
 };
 
-export default ({ options, id }) => {
+export default ({ options, id, className }) => {
   const optionsArray = options.map(s => createOptions(s, s));
   return (
-    <div className="select-wrapper">
+    <div className={className}>
       <ReactMultiSelectCheckboxes options={optionsArray} />
     </div>
   );

@@ -6,3 +6,11 @@
   display: block;
   margin: auto;
 }
+
+.select-wrapper:first-child {
+  text-align: center;
+}
+
+.select-wrapper:nth-child(2) {
+  margin: auto;
+}
