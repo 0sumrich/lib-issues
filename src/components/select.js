@@ -11,13 +11,14 @@
 //     </select>
 //   </div>
 // );
-import React from 'react'
-import ReactMultiSelectCheckboxes from 'react-multiselect-checkboxes';
- 
-// ...
-const options = [
-  { label: 'Thing 1', value: 1},
-  { label: 'Thing 2', value: 2},
-];
+import React from "react";
+import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
 
-<ReactMultiSelectCheckboxes options={options} />
+const createOptions = (label, value) => {
+  return { label, value };
+};
+
+export default ({ options, id }) => {
+  const OptionsArray = options.map(s => createOptions(s, s));
+  return <ReactMultiSelectCheckboxes options={options} />;
+};
