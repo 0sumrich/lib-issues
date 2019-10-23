@@ -19,6 +19,13 @@ const createOptions = (label, value) => {
 };
 
 export default ({ options, id }) => {
-  const OptionsArray = options.map(s => createOptions(s, s));
-  return <ReactMultiSelectCheckboxes options={options} />;
+  const optionsArray = options.map(s => createOptions(s, s));
+  return (
+    <div className="select-wrapper">
+      <ReactMultiSelectCheckboxes
+        options={optionsArray}
+        className="react-select"
+      />
+    </div>
+  );
 };
