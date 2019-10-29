@@ -45,7 +45,7 @@ const Chart = ({ data }) => {
 
   return (
     <div className='chart-wrapper'>
-      <Select options={siteOfLoans} />
+      <Select options={siteOfLoans} className='select-wrapper'/>
       <Svg id="chart" />
     </div>
   );

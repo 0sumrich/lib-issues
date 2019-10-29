@@ -18,6 +18,12 @@ const createOptions = (label, value) => {
   return { label, value };
 };
 
+const styles = {
+  
+}
+
+// styles={styles}
+
 export default ({ options, id, className }) => {
   const optionsArray = options.map(s => createOptions(s, s));
   return (
