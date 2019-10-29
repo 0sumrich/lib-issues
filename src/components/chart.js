@@ -34,6 +34,9 @@ const Chart = ({ data }) => {
   const [drawData, setData] = useState(data);
   const uniqueValues = getUniqueValues(drawData);
   const siteOfLoans = ["All", ...uniqueValues["Site of loan"]];
+  const [selected, setSelected] = useState(siteOfLoans[0])
+  
+  
 
   useEffect(() => {
     const start = uniqueValues["Count start"][0];
@@ -45,7 +48,7 @@ const Chart = ({ data }) => {
 
   return (
     <div className='chart-wrapper'>
-      <Select options={siteOfLoans} className='select-wrapper'/>
+      <Select options={siteOfLoans} className='select-wrapper'value={selected} defaultValue='All'/>
       <Svg id="chart" />
     </div>
   );

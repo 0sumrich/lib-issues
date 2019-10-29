@@ -18,17 +18,11 @@ const createOptions = (label, value) => {
   return { label, value };
 };
 
-const styles = {
-  
-}
-
-// styles={styles}
-
-export default ({ options, id, className }) => {
+export default ({ options, id, className, value }) => {
   const optionsArray = options.map(s => createOptions(s, s));
   return (
     <div className={className}>
-      <ReactMultiSelectCheckboxes options={optionsArray} />
+      <ReactMultiSelectCheckboxes options={optionsArray} value={value} defaultValue='All'/>
     </div>
   );
 };
