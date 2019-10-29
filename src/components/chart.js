@@ -51,7 +51,7 @@ const Chart = ({ data }) => {
         options={siteOfLoans}
         className="select-wrapper"
         defaultValue={selected}
-        placeHolderButtonLabel={'Library'}
+        placeHolderButtonLabel={'Site of Loan'}
       />
       <Svg id="chart" />
     </div>
