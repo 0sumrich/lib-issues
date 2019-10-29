@@ -4,7 +4,7 @@ import Svg from "./svg";
 import { unique, getUniqueValues } from "../helper/getUniqueValues";
 import Select from "./select";
 import { nest, sum } from "d3";
-import "../style/chart.css";
+// import "../style/chart.css";
 
 // Data object keys from csv
 // Local authority,
@@ -44,8 +44,8 @@ const Chart = ({ data }) => {
   });
 
   return (
-    <div className="chart-wrapper">
-      <Select options={siteOfLoans} className='select-wrapper' />
+    <div >
+      <Select options={siteOfLoans} />
       <Svg id="chart" />
     </div>
   );
