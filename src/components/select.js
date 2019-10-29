@@ -18,14 +18,19 @@ const createOptions = (label, value) => {
   return { label, value };
 };
 
-export default ({ options, id, className, value }) => {
-  const optionsArray = options.map(s => createOptions(s, s));
+export default ({ options, id, className, defaultValue }) => {
+  const createOptions = (label, value) => {
+    return { label, value };
+  };
+  
+  const opts = options.map(s => createOptions(s, s))
+  
   return (
     <div className={className}>
       <ReactMultiSelectCheckboxes
-        options={optionsArray}
-        defaultValue={optionsArray[0]}
-        onChange={(arr) => console.log(arr)}
+        options={opts}
+        defaultValue={createOptions(defaultValue, defaultValue)}
+        onChange={arr => console.log(arr)}
       />
     </div>
   );
