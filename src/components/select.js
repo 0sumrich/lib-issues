@@ -22,7 +22,11 @@ export default ({ options, id, className, value }) => {
   const optionsArray = options.map(s => createOptions(s, s));
   return (
     <div className={className}>
-      <ReactMultiSelectCheckboxes options={optionsArray} defaultValue={'All'} onChange={(e) => console.log(e.value)}/>
+      <ReactMultiSelectCheckboxes
+        options={optionsArray}
+        defaultValue={optionsArray[0]}
+        onChange={(arr) => console.log(arr)}
+      />
     </div>
   );
 };

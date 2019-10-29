@@ -4,7 +4,7 @@ import Svg from "./svg";
 import { unique, getUniqueValues } from "../helper/getUniqueValues";
 import Select from "./select";
 import { nest, sum } from "d3";
- import "../style/chart.css";
+import "../style/chart.css";
 
 // Data object keys from csv
 // Local authority,
@@ -34,9 +34,12 @@ const Chart = ({ data }) => {
   const [drawData, setData] = useState(data);
   const uniqueValues = getUniqueValues(drawData);
   const siteOfLoans = ["All", ...uniqueValues["Site of loan"]];
-  const [selected, setSelected] = useState(siteOfLoans[0])
-  
-  
+  const createOptions = (label, value) => {
+    return { label, value };
+  };
+
+  const options = createOptions(siteOfLoans);
+  const [selected, setSelected] = useState(options[0]);
 
   useEffect(() => {
     const start = uniqueValues["Count start"][0];
@@ -46,9 +49,14 @@ const Chart = ({ data }) => {
     draw(summed);
   });
 
+  
   return (
-    <div className='chart-wrapper'>
-      <Select options={siteOfLoans} className='select-wrapper' defaultValue='All'/>
+    <div className="chart-wrapper">
+      <Select
+        options={options}
+        className="select-wrapper"
+        defaultValue={selected}
+      />
       <Svg id="chart" />
     </div>
   );
