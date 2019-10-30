@@ -49,7 +49,7 @@ const Chart = ({ data }) => {
     if (values.indexOf("All") == 0 && arr.length > 1) {
       arr.splice(0, 1);
     } else if (values.indexOf("All") === arr.length - 1) {
-      arr = ["All"];
+      debugger;
     }
     console.log(values.indexOf("All"));
     setSelected(arr);
