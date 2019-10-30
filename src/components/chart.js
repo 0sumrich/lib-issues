@@ -30,14 +30,6 @@ const sumAll = arr => {
     });
 };
 
-function handleLoanSiteChange(arr, setSelected) {
-  if (arr.map(x => x.value).includes("All") && arr.length > 1) {
-    const i = arr.map(x => x.value).indexOf("All");
-    arr.splice(i, 1);
-  }
-  console.log(arr.map(x => x.value))
-}
-
 const Chart = ({ data }) => {
   const [drawData, setData] = useState(data);
   const uniqueValues = getUniqueValues(drawData);
@@ -52,6 +44,17 @@ const Chart = ({ data }) => {
     draw(summed);
   });
 
+  const handleLoanSiteChange = arr => {
+    const values = arr.map(x => x.value);
+    if (values.indexOf("All") == 0 && arr.length > 1) {
+      arr.splice(0, 1);
+    } else if (values.indexOf("All") === arr.length - 1) {
+      arr = ["All"];
+    }
+    console.log(values.indexOf("All"));
+    setSelected(arr);
+  };
+
   return (
     <div className="chart-wrapper">
       <Select
@@ -59,7 +62,7 @@ const Chart = ({ data }) => {
         className="select-wrapper"
         defaultValue={selected}
         placeHolderButtonLabel={"Site of Loan"}
-        onChange={[handleLoanSiteChange, setSelected]}
+        onChange={handleLoanSiteChange}
       />
       <Svg id="chart" />
     </div>
