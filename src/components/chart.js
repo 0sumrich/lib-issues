@@ -30,6 +30,10 @@ const sumAll = arr => {
     });
 };
 
+function handleLoanSiteChange(arr){
+  console.log(arr)
+}
+
 const Chart = ({ data }) => {
   const [drawData, setData] = useState(data);
   const uniqueValues = getUniqueValues(drawData);
@@ -52,6 +56,7 @@ const Chart = ({ data }) => {
         className="select-wrapper"
         defaultValue={selected}
         placeHolderButtonLabel={'Site of Loan'}
+        onChange={handleLoanSiteChange}
       />
       <Svg id="chart" />
     </div>

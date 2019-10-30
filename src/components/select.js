@@ -18,7 +18,7 @@ const createOptions = (label, value) => {
   return { label, value };
 };
 
-export default ({ options, id, className, defaultValue }) => {
+export default ({ options, id, className, defaultValue, onChange }) => {
   const createOptions = (label, value) => {
     return { label, value };
   };
@@ -30,7 +30,7 @@ export default ({ options, id, className, defaultValue }) => {
       <ReactMultiSelectCheckboxes
         options={opts}
         defaultValue={createOptions(defaultValue, defaultValue)}
-        onChange={arr => console.log(arr)}
+        onChange={onChange}
       />
     </div>
   );
