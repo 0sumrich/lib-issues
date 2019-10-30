@@ -32,15 +32,15 @@ const sumAll = arr => {
 };
 
 const Chart = ({ data }) => {
-  const [drawData, setData] = useState(data);
-  const uniqueValues = getUniqueValues(drawData);
+  // const [drawData, setData] = useState(data);
+  const uniqueValues = getUniqueValues(data);
   const siteOfLoans = ["All", ...uniqueValues["Site of loan"]];
   const [selected, setSelected] = useState([siteOfLoans[0]]);
 
   useEffect(() => {
     const start = uniqueValues["Count start"][0];
     const end = uniqueValues["Count end"][0];
-    const filtered = filterByDate(drawData, start, end);
+    const filtered = filterByDate(data, start, end);
     const summed = sumAll(filtered);
     draw(summed);
   });
