@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import draw from "../helper/draw";
 import Svg from "./svg";
 import { unique, getUniqueValues } from "../helper/getUniqueValues";
-import selectAllClick from '../helper/selectAllClick'
+import selectAllClick from "../helper/selectAllClick";
 import Select from "./select";
 import { nest, sum } from "d3";
 import "../style/chart.css";
@@ -46,8 +46,17 @@ const Chart = ({ data }) => {
   });
 
   const handleLoanSiteChange = arr => {
-    selectAllClick(arr)
+    selectAllClick(arr);
     setSelected(arr.map(x => x.value));
+    const start = uniqueValues["Count start"][0];
+    const end = uniqueValues["Count end"][0];
+    const filtered = filterByDate(data, start, end);
+    const summed = sumAll(filtered);
+    if (selected === ["All"]) {
+      draw(summed);
+    } else {
+      draw(summed.filter(o => selected.includes(o["Site of loan"])));
+    }
   };
 
   return (
@@ -55,7 +64,7 @@ const Chart = ({ data }) => {
       <Select
         options={siteOfLoans}
         className="select-wrapper"
-        defaultValue={selected}
+        defaultValue={selected[0]}
         placeHolderButtonLabel={"Site of Loan"}
         onChange={handleLoanSiteChange}
       />
