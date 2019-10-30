@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import draw from "../helper/draw";
 import Svg from "./svg";
 import { unique, getUniqueValues } from "../helper/getUniqueValues";
+import selectAllClick from '../helper/selectAllClick'
 import Select from "./select";
 import { nest, sum } from "d3";
 import "../style/chart.css";
@@ -34,7 +35,7 @@ const Chart = ({ data }) => {
   const [drawData, setData] = useState(data);
   const uniqueValues = getUniqueValues(drawData);
   const siteOfLoans = ["All", ...uniqueValues["Site of loan"]];
-  const [selected, setSelected] = useState(siteOfLoans[0]);
+  const [selected, setSelected] = useState([siteOfLoans[0]]);
 
   useEffect(() => {
     const start = uniqueValues["Count start"][0];
@@ -45,15 +46,7 @@ const Chart = ({ data }) => {
   });
 
   const handleLoanSiteChange = arr => {
-    const values = arr.map(x => x.value);
-    if (values.indexOf("All") == 0 && arr.length > 1) {
-      arr.splice(0, 1);
-    } else if (values.indexOf("All") === arr.length - 1) {
-      while(arr.length>1){
-        arr.shift()
-      }
-    }
-    console.log(values.indexOf("All"));
+    selectAllClick(arr)
     setSelected(arr.map(x => x.value));
   };
 
