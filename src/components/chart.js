@@ -47,12 +47,14 @@ const Chart = ({ data }) => {
 
   const handleLoanSiteChange = arr => {
     selectAllClick(arr);
+    console.log(arr.map(x => x.value))
     setSelected(arr.map(x => x.value));
     const start = uniqueValues["Count start"][0];
     const end = uniqueValues["Count end"][0];
     const filtered = filterByDate(data, start, end);
     const summed = sumAll(filtered);
     if (selected === ["All"]) {
+      debugger;
       draw(summed);
     } else {
       draw(summed.filter(o => selected.includes(o["Site of loan"])));

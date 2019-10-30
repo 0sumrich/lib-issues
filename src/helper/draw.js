@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 
 function draw(data) {
+
   const margin = { top: 30, right: 30, bottom: 50, left: 40 };
   const width = 1000 - margin.left - margin.right;
   const height = 600 - margin.top - margin.bottom;
@@ -44,41 +45,41 @@ function draw(data) {
       const text = d3
         .select(this)
         .selectAll(".tick text")
-      .each(function() {
-        const text = d3.select(this);
-        const words = text
-          .text()
-          .split(/\s+/)
-          .reverse();
-        const width = x.bandwidth() - 10;
-        let word = "";
-        let line = [];
-        let lineNumber = 0;
-        const lineHeight = 1.1; // ems
-        const y = text.attr("y");
-        const dy = +text.attr("dy").slice(0, -3);
-        let tspan = text
-          .text(null)
-          .append("tspan")
-          .attr("x", 0)
-          .attr("y", y)
-          .attr("dy", dy + "em");
-        while ((word = words.pop())) {
-          line.push(word);
-          tspan.text(line.join(" "));
-          if (tspan.node().getComputedTextLength() > width) {
-            line.pop();
+        .each(function() {
+          const text = d3.select(this);
+          const words = text
+            .text()
+            .split(/\s+/)
+            .reverse();
+          const width = x.bandwidth() - 10;
+          let word = "";
+          let line = [];
+          let lineNumber = 0;
+          const lineHeight = 1.1; // ems
+          const y = text.attr("y");
+          const dy = +text.attr("dy").slice(0, -3);
+          let tspan = text
+            .text(null)
+            .append("tspan")
+            .attr("x", 0)
+            .attr("y", y)
+            .attr("dy", dy + "em");
+          while ((word = words.pop())) {
+            line.push(word);
             tspan.text(line.join(" "));
-            line = [word];
-            tspan = text
-              .append("tspan")
-              .attr("x", 0)
-              .attr("y", y)
-              .attr("dy", ++lineNumber * lineHeight + dy + "em")
-              .text(word);
+            if (tspan.node().getComputedTextLength() > width) {
+              line.pop();
+              tspan.text(line.join(" "));
+              line = [word];
+              tspan = text
+                .append("tspan")
+                .attr("x", 0)
+                .attr("y", y)
+                .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                .text(word);
+            }
           }
-        }
-      });
+        });
     });
 
   chart.append("g").call(d3.axisLeft(y));
