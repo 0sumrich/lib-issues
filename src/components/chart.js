@@ -30,8 +30,12 @@ const sumAll = arr => {
     });
 };
 
-function handleLoanSiteChange(arr){
-  console.log(arr)
+function handleLoanSiteChange(arr, setSelected) {
+  if (arr.map(x => x.value).includes("All") && arr.length > 1) {
+    const i = arr.map(x => x.value).indexOf("All");
+    arr.splice(i, 1);
+  }
+  console.log(arr.map(x => x.value))
 }
 
 const Chart = ({ data }) => {
@@ -48,15 +52,14 @@ const Chart = ({ data }) => {
     draw(summed);
   });
 
-  
   return (
     <div className="chart-wrapper">
       <Select
         options={siteOfLoans}
         className="select-wrapper"
         defaultValue={selected}
-        placeHolderButtonLabel={'Site of Loan'}
-        onChange={handleLoanSiteChange}
+        placeHolderButtonLabel={"Site of Loan"}
+        onChange={[handleLoanSiteChange, setSelected]}
       />
       <Svg id="chart" />
     </div>

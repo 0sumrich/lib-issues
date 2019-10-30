@@ -30,7 +30,7 @@ export default ({ options, id, className, defaultValue, onChange }) => {
       <ReactMultiSelectCheckboxes
         options={opts}
         defaultValue={createOptions(defaultValue, defaultValue)}
-        onChange={onChange}
+        onChange={arr => onChange[0](arr, onChange[1])}
       />
     </div>
   );
