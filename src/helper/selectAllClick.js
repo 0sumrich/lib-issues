@@ -7,6 +7,7 @@ function selectAllClick(arr) {
       arr.shift();
     }
   }
+  return arr;
 }
 
 export default selectAllClick

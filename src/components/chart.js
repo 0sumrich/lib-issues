@@ -46,9 +46,9 @@ const Chart = ({ data }) => {
   });
 
   const handleLoanSiteChange = arr => {
-    selectAllClick(arr);
-    console.log(arr.map(x => x.value))
-    setSelected(arr.map(x => x.value));
+    const newSelected = selectAllClick(arr).map(x => x.value);
+    setSelected(newSelected);
+    console.log(selected)
     const start = uniqueValues["Count start"][0];
     const end = uniqueValues["Count end"][0];
     const filtered = filterByDate(data, start, end);
@@ -60,7 +60,7 @@ const Chart = ({ data }) => {
       draw(summed.filter(o => selected.includes(o["Site of loan"])));
     }
   };
-
+  console.log(selected)
   return (
     <div className="chart-wrapper">
       <Select
