@@ -51,10 +51,7 @@ const Chart = ({ data }) => {
     const end = uniqueValues["Count end"][0];
     const filtered = filterByDate(data, start, end);
     const summed = sumAll(filtered);
-    console.log(selected)
-    debugger;
-    if (selected === ["All"]) {
-      debugger;
+    if (selected.includes("All")) {
       draw(summed);
     } else {
       draw(summed.filter(o => selected.includes(o["Site of loan"])));
