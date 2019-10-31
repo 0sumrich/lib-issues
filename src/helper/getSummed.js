@@ -3,12 +3,25 @@ import { nest, sum } from "d3";
 const filterByDate = (arr, start, end) =>
   arr.filter(o => o["Count start"] === start && o["Count end"] === end);
 
+// Data object keys from csv
+// Local authority,
+// Site of loan,
+// Count start,
+// Count end,
+// Type,
+// Book,
+// Issues
+
+const concatDates = o => o.start + " - " + o.end;
+
 const sumAll = arr => {
   return nest()
-    .key(d => d["Site of loan"])
+    .key(d => d["Local authority"])
+    .key(d => concatDates(d.Dates))
     .rollup(d => sum(d.map(o => o["Issues"])))
     .entries(arr)
     .map(o => {
+      debugger;
       return { "Site of loan": o.key, Issues: o.value };
     });
 };
@@ -17,7 +30,7 @@ const getSummed = (data, uniqueValues) => {
   const start = uniqueValues["Count start"][0];
   const end = uniqueValues["Count end"][0];
   const filtered = filterByDate(data, start, end);
-  const testData = sumAll(data)
+  const testData = sumAll(data);
   return sumAll(filtered);
 };
 
