@@ -43,14 +43,16 @@ const Chart = ({ data }) => {
 
   return (
     <div>
-      <div className="chart-wrapper">
+      <div className="filter-wrapper">
         <SiteOfLoan options={siteOfLoans} onChange={handleLoanSiteChange} />
         <Dates
           dates={uniqueValues["Dates"]}
           onChange={arr => console.log(arr)}
         />
       </div>
-      <Svg id="chart" />
+      <div className="chart-wrapper">
+        <Svg id="chart" />
+      </div>
     </div>
   );
 };

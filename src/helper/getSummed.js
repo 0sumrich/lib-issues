@@ -17,6 +17,7 @@ const getSummed = (data, uniqueValues) => {
   const start = uniqueValues["Count start"][0];
   const end = uniqueValues["Count end"][0];
   const filtered = filterByDate(data, start, end);
+  const testData = sumAll(data)
   return sumAll(filtered);
 };
 
