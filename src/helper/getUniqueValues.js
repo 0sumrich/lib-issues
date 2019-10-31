@@ -31,7 +31,6 @@ const getUniqueValues = d => {
       res[col] = unique(col, data);
     }
   });
-  debugger;
   return res;
 };
 

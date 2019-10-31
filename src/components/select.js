@@ -26,10 +26,6 @@ export default ({
   onChange,
   placeholderButtonLabel
 }) => {
-  const createOptions = (label, value) => {
-    return { label, value };
-  };
-
   const opts = options.map(s => createOptions(s, s));
 
   return (
