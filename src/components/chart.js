@@ -33,17 +33,17 @@ const sumAll = arr => {
 };
 
 const getSummed = (data, uniqueValues) => {
-    const start = uniqueValues["Count start"][0];
-    const end = uniqueValues["Count end"][0];
-    const filtered = filterByDate(data, start, end);
-    return sumAll(filtered);
-}
+  const start = uniqueValues["Count start"][0];
+  const end = uniqueValues["Count end"][0];
+  const filtered = filterByDate(data, start, end);
+  return sumAll(filtered);
+};
 
 const Chart = ({ data }) => {
   const uniqueValues = getUniqueValues(data);
   const siteOfLoans = ["All", ...uniqueValues["Site of loan"]];
-  const summedData = getSummed(data);
-  
+  const summedData = getSummed(data, uniqueValues);
+
   useEffect(() => {
     draw(summedData);
   });
@@ -56,7 +56,7 @@ const Chart = ({ data }) => {
       draw(summedData.filter(o => selected.includes(o["Site of loan"])));
     }
   };
-  
+
   return (
     <div className="chart-wrapper">
       <SiteOfLoan options={siteOfLoans} onChange={handleLoanSiteChange} />
