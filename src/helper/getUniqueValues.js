@@ -3,6 +3,7 @@ const getColumn = (colName, dataArr) => dataArr.map(o => o[colName]);
 const unique = (str, data) => getUnique(getColumn(str, data));
 const columns = data => Object.keys(data[0]);
 const getUniqueValues = data => {
+  debugger;
   const res = {};
   columns(data).forEach(col => {
     res[col] = unique(col, data);
