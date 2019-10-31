@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import draw from "../helper/draw";
 import Svg from "./svg";
-import { unique, getUniqueValues } from "../helper/getUniqueValues";
-import selectAllClick from "../helper/selectAllClick";
 import Select from "./select";
 import SiteOfLoan from "./siteOfLoan";
+import { unique, getUniqueValues } from "../helper/getUniqueValues";
+import selectAllClick from "../helper/selectAllClick";
+import draw from "../helper/draw";
 import { nest, sum } from "d3";
 import "../style/chart.css";
 
@@ -32,20 +32,31 @@ const sumAll = arr => {
     });
 };
 
-const Chart = ({ data }) => {
-  // const [drawData, setData] = useState(data);
-  const uniqueValues = getUniqueValues(data);
-  const siteOfLoans = ["All", ...uniqueValues["Site of loan"]];
-  // const [selected, setSelected] = useState([siteOfLoans[0]]);
-
-  useEffect(() => {
+const getSummed = (data, uniqueValues) => {
     const start = uniqueValues["Count start"][0];
     const end = uniqueValues["Count end"][0];
     const filtered = filterByDate(data, start, end);
-    const summed = sumAll(filtered);
-    draw(summed);
+    return sumAll(filtered);
+}
+
+const Chart = ({ data }) => {
+  const uniqueValues = getUniqueValues(data);
+  const siteOfLoans = ["All", ...uniqueValues["Site of loan"]];
+  const summedData = getSummed(data);
+  
+  useEffect(() => {
+    draw(summedData);
   });
 
+  const handleLoanSiteChange = arr => {
+    const selected = selectAllClick(arr).map(x => x.value);
+    if (selected.includes("All")) {
+      draw(summedData);
+    } else {
+      draw(summedData.filter(o => selected.includes(o["Site of loan"])));
+    }
+  };
+  
   return (
     <div className="chart-wrapper">
       <SiteOfLoan options={siteOfLoans} onChange={handleLoanSiteChange} />
