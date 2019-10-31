@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import Svg from "./svg";
 import SiteOfLoan from "./siteOfLoan";
-import Dates from './dates'
+import Dates from "./dates";
 import { getUniqueValues } from "../helper/getUniqueValues";
 import selectAllClick from "../helper/selectAllClick";
 import draw from "../helper/draw";
-import getSummed from '../helper/getSummed'
+import getSummed from "../helper/getSummed";
 import "../style/chart.css";
 
 // Data object keys from csv
@@ -20,7 +20,7 @@ import "../style/chart.css";
 //total loans by site
 
 // const fixDates = (start, end) => {
-  
+
 // }
 
 const Chart = ({ data }) => {
@@ -42,9 +42,14 @@ const Chart = ({ data }) => {
   };
 
   return (
-    <div className="chart-wrapper">
-      <SiteOfLoan options={siteOfLoans} onChange={handleLoanSiteChange} />
-      <Dates/>
+    <div>
+      <div className="chart-wrapper">
+        <SiteOfLoan options={siteOfLoans} onChange={handleLoanSiteChange} />
+        <Dates
+          dates={uniqueValues["Dates"]}
+          onChange={arr => console.log(arr)}
+        />
+      </div>
       <Svg id="chart" />
     </div>
   );
