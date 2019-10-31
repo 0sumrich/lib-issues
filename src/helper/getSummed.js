@@ -18,9 +18,9 @@ const sumAll = a => {
   for(let i=0;i<a.length;i++){
     const o = a[i];
     const dates = concatDates(o)
-    debugger;
+    o.Dates = dates
+    arr.push(o)
   }
-  debugger;
   return nest()
     .key(d => d["Local authority"])
     .key(d => d["Dates"])
