@@ -1,9 +1,10 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import draw from "../helper/draw";
 import Svg from "./svg";
 import { unique, getUniqueValues } from "../helper/getUniqueValues";
 import selectAllClick from "../helper/selectAllClick";
 import Select from "./select";
+import SiteOfLoan from "./siteOfLoan";
 import { nest, sum } from "d3";
 import "../style/chart.css";
 
@@ -59,13 +60,7 @@ const Chart = ({ data }) => {
   };
   return (
     <div className="chart-wrapper">
-      <Select
-        options={siteOfLoans}
-        className="select-wrapper"
-        defaultValue={siteOfLoans[0]}
-        placeholderButtonLabel={"Site of Loan"}
-        onChange={handleLoanSiteChange}
-      />
+      <SiteOfLoan options={siteOfLoans} onChange={handleLoanSiteChange} />
       <Svg id="chart" />
     </div>
   );

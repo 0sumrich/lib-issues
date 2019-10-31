@@ -38,7 +38,7 @@ export default ({
         options={opts}
         defaultValue={createOptions(defaultValue, defaultValue)}
         onChange={onChange}
-        placeHolderButtonLabel={placeholderButtonLabel}
+        placeholderButtonLabel={placeholderButtonLabel}
       />
     </div>
   );
