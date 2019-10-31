@@ -18,11 +18,15 @@ const sumAll = arr => {
   return nest()
     .key(d => d["Local authority"])
     .key(d => concatDates(d.Dates))
+    .key(d => d['Site of loan'])
     .rollup(d => sum(d.map(o => o["Issues"])))
     .entries(arr)
     .map(o => {
-      debugger;
-      return { "Site of loan": o.key, Issues: o.value };
+      return { "Local authority": o.key, values: o.values.map(p => {
+        return {Dates: p.dates, values: p.values.map(q => {
+                                                     return {'Site of loan': q.key, Issues: q.values}
+                                                            })};
+      }) };
     });
 };
 
@@ -31,6 +35,7 @@ const getSummed = (data, uniqueValues) => {
   const end = uniqueValues["Count end"][0];
   const filtered = filterByDate(data, start, end);
   const testData = sumAll(data);
+  debugger;
   return sumAll(filtered);
 };
 
