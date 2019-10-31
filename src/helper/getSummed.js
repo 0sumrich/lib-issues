@@ -12,12 +12,18 @@ const filterByDate = (arr, start, end) =>
 // Book,
 // Issues
 
-const concatDates = o => o['Count start'] + " - " + o['Count end'];
+const concatDates = o => o["Count start"] + " - " + o["Count end"];
 const sumAll = a => {
-  const arr = a.forEach(o => o.Dates=concatDates(o))
+  let arr = []
+  for(let i=0;i<a.length;i++){
+    const o = a[i];
+    const dates = concatDates(o)
+    debugger;
+  }
+  debugger;
   return nest()
     .key(d => d["Local authority"])
-    .key(d => d['Dates'])
+    .key(d => d["Dates"])
     .key(d => d["Site of loan"])
     .rollup(d => sum(d.map(o => o["Issues"])))
     .entries(arr)
@@ -45,4 +51,4 @@ const getSummed = (data, uniqueValues) => {
   return sumAll(filtered);
 };
 
-export default getSummed;
+export default sumAll;

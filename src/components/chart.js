@@ -5,7 +5,7 @@ import Dates from "./dates";
 import { getUniqueValues } from "../helper/getUniqueValues";
 import selectAllClick from "../helper/selectAllClick";
 import draw from "../helper/draw";
-import getSummed from "../helper/getSummed";
+import sumAll from "../helper/getSummed";
 import "../style/chart.css";
 
 // Data object keys from csv
@@ -24,10 +24,11 @@ import "../style/chart.css";
 // }
 
 const Chart = ({ data }) => {
-  const uniqueValues = getUniqueValues(data);
-  const siteOfLoans = ["All", ...uniqueValues["Site of loan"]];
-  const summedData = getSummed(data, uniqueValues);
-
+  // const uniqueValues = getUniqueValues(data);
+  // const siteOfLoans = ["All", ...uniqueValues["Site of loan"]];
+  // const summedData = getSummed(data, uniqueValues);
+  const summedData = sumAll(data);
+  debugger;
   useEffect(() => {
     draw(summedData);
   });
@@ -41,20 +42,21 @@ const Chart = ({ data }) => {
     }
   };
 
-  return (
-    <div>
-      <div className="filter-wrapper">
-        <SiteOfLoan options={siteOfLoans} onChange={handleLoanSiteChange} />
-        <Dates
-          dates={uniqueValues["Dates"]}
-          onChange={arr => console.log(arr)}
-        />
-      </div>
-      <div className="chart-wrapper">
-        <Svg id="chart" />
-      </div>
-    </div>
-  );
+//   return (
+//     <div>
+//       <div className="filter-wrapper">
+//         <SiteOfLoan options={siteOfLoans} onChange={handleLoanSiteChange} />
+//         <Dates
+//           dates={uniqueValues["Dates"]}
+//           onChange={arr => console.log(arr)}
+//         />
+//       </div>
+//       <div className="chart-wrapper">
+//         <Svg id="chart" />
+//       </div>
+//     </div>
+//   );
+  return null;
 };
 
 export default Chart;
