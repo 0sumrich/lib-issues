@@ -25,6 +25,7 @@ import "../style/chart.css";
 
 const Chart = ({ data }) => {
   const uniqueValues = getUniqueValues(data);
+  debugger;
   const siteOfLoans = ["All", ...uniqueValues["Site of loan"]];
   const summedData = getSummed(data, uniqueValues);
 
