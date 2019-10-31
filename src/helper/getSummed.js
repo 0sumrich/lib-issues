@@ -12,21 +12,27 @@ const filterByDate = (arr, start, end) =>
 // Book,
 // Issues
 
-const concatDates = o => o.start + " - " + o.end;
-
-const sumAll = arr => {
+const concatDates = o => o['Count start'] + " - " + o['Count end'];
+const sumAll = a => {
+  const arr = a.forEach(o => o.Dates=concatDates(o))
   return nest()
     .key(d => d["Local authority"])
-    .key(d => concatDates(d.Dates))
-    .key(d => d['Site of loan'])
+    .key(d => d['Dates'])
+    .key(d => d["Site of loan"])
     .rollup(d => sum(d.map(o => o["Issues"])))
     .entries(arr)
     .map(o => {
-      return { "Local authority": o.key, values: o.values.map(p => {
-        return {Dates: p.dates, values: p.values.map(q => {
-                                                     return {'Site of loan': q.key, Issues: q.values}
-                                                            })};
-      }) };
+      return {
+        "Local authority": o.key,
+        values: o.values.map(p => {
+          return {
+            Dates: p.dates,
+            values: p.values.map(q => {
+              return { "Site of loan": q.key, Issues: q.values };
+            })
+          };
+        })
+      };
     });
 };
 
