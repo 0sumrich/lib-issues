@@ -4,7 +4,7 @@ function draw(data) {
   d3.select("#chart")
     .selectAll("*")
     .remove();
-  
+
   const margin = { top: 30, right: 30, bottom: 50, left: 40 };
   const width = 1000 - margin.left - margin.right;
   const height = 600 - margin.top - margin.bottom;
@@ -45,8 +45,7 @@ function draw(data) {
     .attr("transform", `translate(0, ${height})`)
     .call(d3.axisBottom(x))
     .each(function() {
-      const text = d3
-        .select(this)
+      d3.select(this)
         .selectAll(".tick text")
         .each(function() {
           const text = d3.select(this);
