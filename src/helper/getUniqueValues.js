@@ -1,6 +1,9 @@
 const getUnique = arr => [...new Set(arr)];
 const getColumn = (colName, dataArr) => dataArr.map(o => o[colName]);
 const unique = (str, data) => getUnique(getColumn(str, data));
+const uniqueDates = arr => {
+  
+}
 const columns = data => Object.keys(data[0]);
 const datesFix = data => {
   for (let i = 0; i < data.length; i++) {
@@ -13,6 +16,7 @@ const getUniqueValues = d => {
   const data = datesFix(d);
   const res = {};
   columns(data).forEach(col => {
+    debugger;
     res[col] = unique(col, data);
   });
   return res;
