@@ -1,6 +1,8 @@
 import * as d3 from "d3";
 
-function draw(data) {
+function draw(data, options) {
+  const { localAuthority, dates, siteOfLoan } = options;
+  // const chartData = data[0].values[0].values
   d3.select("#chart")
     .selectAll("*")
     .remove();

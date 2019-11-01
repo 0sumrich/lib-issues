@@ -28,8 +28,13 @@ const Chart = ({ data }) => {
   // const summedData = sumAll(data);
   useEffect(() => {
     const chartData = data[0].values[0].values
-    console.log(chartData)
-    draw(chartData);
+    const init = data[0]
+    const options = {
+      localAuthority: init['Local authority'],
+      dates: init.values[0].Dates,
+      siteOfLoan: 'All' 
+    }
+    draw(data, options);
   });
 
   // const handleLoanSiteChange = arr => {
