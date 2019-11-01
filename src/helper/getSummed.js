@@ -34,7 +34,7 @@ const sumAll = a => {
           return {
             Dates: p.key,
             values: p.values.map(q => {
-              return { 'Site of Loan': q.key, 'Issues': q.value };
+              return { 'Site of loan': q.key, 'Issues': q.value };
             })
           };
         })

@@ -26,9 +26,11 @@ const Chart = ({ data }) => {
   // const siteOfLoans = ["All", ...uniqueValues["Site of loan"]];
   // const summedData = getSummed(data, uniqueValues);
   // const summedData = sumAll(data);
-  // useEffect(() => {
-  //   draw(summedData);
-  // });
+  useEffect(() => {
+    const chartData = data[0].values[0].values
+    console.log(chartData)
+    draw(chartData);
+  });
 
   // const handleLoanSiteChange = arr => {
   //   const selected = selectAllClick(arr).map(x => x.value);
@@ -55,13 +57,6 @@ const Chart = ({ data }) => {
   // );
     return (
     <div>
-      <div className="filter-wrapper">
-        <SiteOfLoan options={siteOfLoans} onChange={handleLoanSiteChange} />
-        <Dates
-          dates={uniqueValues["Dates"]}
-          onChange={arr => console.log(arr)}
-        />
-      </div>
       <div className="chart-wrapper">
         <Svg id="chart" />
       </div>
