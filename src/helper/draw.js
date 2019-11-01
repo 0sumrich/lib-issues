@@ -3,27 +3,24 @@ import wrap from "./wrap";
 
 function unpack(d, options) {
   const { localAuthorities, dates, siteOfLoans } = options;
-  debugger;
   let res = [];
   localAuthorities.forEach(la => {
     const LAindex = d.map(o => o["Local authority"]).indexOf(la);
     const datesIndex = d[LAindex].values.map(o => o.Dates).indexOf(dates);
-    const siteFilter = o =>
-      siteOfLoans.includes(o["Site of loan"]) || siteOfLoans === ["All"];
+    const siteFilter = o => {
+      return (
+        siteOfLoans.includes(o["Site of loan"]) || siteOfLoans.includes("All")
+      );
+    };
     const data = d[LAindex].values[datesIndex].values.filter(siteFilter);
-    res.push(...data)
+    res.push(...data);
   });
   return res;
 }
 
 function draw(d, options) {
-  // const { localAuthorities, dates, siteOfLoans } = options;
-  // const LAindex = d.map(o => o["Local authority"]).indexOf(localAuthorities);
-  // const datesIndex = d[LAindex].values.map(o => o.Dates).indexOf(dates);
-  // const siteFilter = o =>
-  //   siteOfLoans.includes(o["Site of loan"]) || siteOfLoans === ["All"];
-  // const data = d[LAindex].values[datesIndex].values.filter(siteFilter);
   const data = unpack(d, options);
+
   d3.select("#chart")
     .selectAll("*")
     .remove();
