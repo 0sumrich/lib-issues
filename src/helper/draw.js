@@ -5,13 +5,9 @@ import * as d3 from "d3";
 function draw(d, options) {
   const { localAuthority, dates, siteOfLoan } = options;
   const LAindex = d.map(o => o['Local authority']).indexOf(localAuthority)
-  const datesIndex = d[LAindex].values.indexOf(dates)
-  const siteFilter = (a, b) => {
-    debugger;
-  }
+  const datesIndex = d[LAindex].values.map(o => o.Dates).indexOf(dates)
+  const siteFilter = o => siteOfLoan.includes(o['Site of loan']) || siteOfLoan==='All'
   const data = d[LAindex].values[datesIndex].values.filter(siteFilter)
-
-  // const chartData = data[0].values[0].values
   d3.select("#chart")
     .selectAll("*")
     .remove();
