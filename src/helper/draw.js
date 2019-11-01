@@ -1,15 +1,19 @@
 import * as d3 from "d3";
-import wrap from './wrap';
+import wrap from "./wrap";
 
-function unpack(d, options){
+function unpack(d, options) {
   const { localAuthorities, dates, siteOfLoans } = options;
+  debugger;
   let res = [];
-  
-  const LAindex = d.map(o => o["Local authority"]).indexOf(localAuthorities);
-  const datesIndex = d[LAindex].values.map(o => o.Dates).indexOf(dates);
-  const siteFilter = o =>
-    siteOfLoans.includes(o["Site of loan"]) || siteOfLoans === ["All"];
-  const data = d[LAindex].values[datesIndex].values.filter(siteFilter);
+  localAuthorities.forEach(la => {
+    const LAindex = d.map(o => o["Local authority"]).indexOf(la);
+    const datesIndex = d[LAindex].values.map(o => o.Dates).indexOf(dates);
+    const siteFilter = o =>
+      siteOfLoans.includes(o["Site of loan"]) || siteOfLoans === ["All"];
+    const data = d[LAindex].values[datesIndex].values.filter(siteFilter);
+    res.push(...data)
+  });
+  return res;
 }
 
 function draw(d, options) {
@@ -19,6 +23,7 @@ function draw(d, options) {
   // const siteFilter = o =>
   //   siteOfLoans.includes(o["Site of loan"]) || siteOfLoans === ["All"];
   // const data = d[LAindex].values[datesIndex].values.filter(siteFilter);
+  const data = unpack(d, options);
   d3.select("#chart")
     .selectAll("*")
     .remove();
@@ -63,10 +68,11 @@ function draw(d, options) {
     .attr("transform", `translate(0, ${height})`)
     .call(d3.axisBottom(x))
     .each(function() {
-      d3.select(this).selectAll('.tick text').each(function(){
-        wrap(d3.select(this), x.bandwidth() - 10);  
-      })
-      
+      d3.select(this)
+        .selectAll(".tick text")
+        .each(function() {
+          wrap(d3.select(this), x.bandwidth() - 10);
+        });
     });
 
   chart.append("g").call(d3.axisLeft(y));

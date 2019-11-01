@@ -28,15 +28,15 @@ const Chart = ({ data }) => {
   // const summedData = getSummed(data, uniqueValues);
   // const summedData = sumAll(data);
   const LAs = data.map(o => o["Local authority"])
-  const [selectedLAs, setLAs] = useState(LAs[0])
+  const [selectedLAs, setLAs] = useState([LAs[0]])
   
   useEffect(() => {
     const chartData = data[0].values[0].values;
     const init = data[0];
     const options = {
-      localAuthority: selectedLAs,
+      localAuthorities: selectedLAs,
       dates: init.values[0].Dates,
-      siteOfLoan: "All"
+      siteOfLoans: ["All"]
     };
     draw(data, options);
   });
