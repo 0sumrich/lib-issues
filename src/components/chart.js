@@ -64,6 +64,7 @@ const Chart = ({ data }) => {
   
   const handleLAChange = arr => {
     const selected = arr.map(x => x.value);
+    setOptions({...options, localAuthorities: selected})
   }
   
   return (
@@ -76,8 +77,6 @@ const Chart = ({ data }) => {
       </div>
     </div>
   );
-
-  return null;
 };
 
 export default Chart;
