@@ -2,10 +2,8 @@ import React, { useEffect } from "react";
 import Svg from "./svg";
 import SiteOfLoan from "./siteOfLoan";
 import Dates from "./dates";
-import { getUniqueValues } from "../helper/getUniqueValues";
 import selectAllClick from "../helper/selectAllClick";
 import draw from "../helper/draw";
-import sumAll from "../helper/getSummed";
 import "../style/chart.css";
 
 // Data object keys from csv
@@ -27,20 +25,19 @@ const Chart = ({ data }) => {
   // const uniqueValues = getUniqueValues(data);
   // const siteOfLoans = ["All", ...uniqueValues["Site of loan"]];
   // const summedData = getSummed(data, uniqueValues);
-  const summedData = sumAll(data);
-  debugger;
-  useEffect(() => {
-    draw(summedData);
-  });
+  // const summedData = sumAll(data);
+  // useEffect(() => {
+  //   draw(summedData);
+  // });
 
-  const handleLoanSiteChange = arr => {
-    const selected = selectAllClick(arr).map(x => x.value);
-    if (selected.includes("All")) {
-      draw(summedData);
-    } else {
-      draw(summedData.filter(o => selected.includes(o["Site of loan"])));
-    }
-  };
+  // const handleLoanSiteChange = arr => {
+  //   const selected = selectAllClick(arr).map(x => x.value);
+  //   if (selected.includes("All")) {
+  //     draw(summedData);
+  //   } else {
+  //     draw(summedData.filter(o => selected.includes(o["Site of loan"])));
+  //   }
+  // };
 
 //   return (
 //     <div>

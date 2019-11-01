@@ -32,9 +32,9 @@ const sumAll = a => {
         "Local authority": o.key,
         values: o.values.map(p => {
           return {
-            Dates: p.dates,
+            Dates: p.key,
             values: p.values.map(q => {
-              return { "Site of loan": q.key, Issues: q.values };
+              return { 'Site of Loan': q.key, 'Issues': q.value };
             })
           };
         })
