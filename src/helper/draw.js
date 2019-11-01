@@ -1,7 +1,6 @@
 import * as d3 from "d3";
 import wrap from './wrap'
 
-
 function draw(d, options) {
   const { localAuthority, dates, siteOfLoan } = options;
   const LAindex = d.map(o => o["Local authority"]).indexOf(localAuthority);
