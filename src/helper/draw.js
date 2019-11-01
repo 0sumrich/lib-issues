@@ -1,13 +1,49 @@
 import * as d3 from "d3";
 
-  
+function wrap(a, x) {
+  const text = d3.select(this);
+  debugger;
+  const words = text
+    .text()
+    .split(/\s+/)
+    .reverse();
+  const width = x.bandwidth() - 10;
+  let word = "";
+  let line = [];
+  let lineNumber = 0;
+  const lineHeight = 1.1; // ems
+  const y = text.attr("y");
+  const dy = +text.attr("dy").slice(0, -3);
+  let tspan = text
+    .text(null)
+    .append("tspan")
+    .attr("x", 0)
+    .attr("y", y)
+    .attr("dy", dy + "em");
+  while ((word = words.pop())) {
+    line.push(word);
+    tspan.text(line.join(" "));
+    if (tspan.node().getComputedTextLength() > width) {
+      line.pop();
+      tspan.text(line.join(" "));
+      line = [word];
+      tspan = text
+        .append("tspan")
+        .attr("x", 0)
+        .attr("y", y)
+        .attr("dy", ++lineNumber * lineHeight + dy + "em")
+        .text(word);
+    }
+  }
+}
 
 function draw(d, options) {
   const { localAuthority, dates, siteOfLoan } = options;
-  const LAindex = d.map(o => o['Local authority']).indexOf(localAuthority)
-  const datesIndex = d[LAindex].values.map(o => o.Dates).indexOf(dates)
-  const siteFilter = o => siteOfLoan.includes(o['Site of loan']) || siteOfLoan==='All'
-  const data = d[LAindex].values[datesIndex].values.filter(siteFilter)
+  const LAindex = d.map(o => o["Local authority"]).indexOf(localAuthority);
+  const datesIndex = d[LAindex].values.map(o => o.Dates).indexOf(dates);
+  const siteFilter = o =>
+    siteOfLoan.includes(o["Site of loan"]) || siteOfLoan === "All";
+  const data = d[LAindex].values[datesIndex].values.filter(siteFilter);
   d3.select("#chart")
     .selectAll("*")
     .remove();
@@ -51,45 +87,7 @@ function draw(d, options) {
     .append("g")
     .attr("transform", `translate(0, ${height})`)
     .call(d3.axisBottom(x))
-    .each(function() {
-      d3.select(this)
-        .selectAll(".tick text")
-        .each(function() {
-          const text = d3.select(this);
-          const words = text
-            .text()
-            .split(/\s+/)
-            .reverse();
-          const width = x.bandwidth() - 10;
-          let word = "";
-          let line = [];
-          let lineNumber = 0;
-          const lineHeight = 1.1; // ems
-          const y = text.attr("y");
-          const dy = +text.attr("dy").slice(0, -3);
-          let tspan = text
-            .text(null)
-            .append("tspan")
-            .attr("x", 0)
-            .attr("y", y)
-            .attr("dy", dy + "em");
-          while ((word = words.pop())) {
-            line.push(word);
-            tspan.text(line.join(" "));
-            if (tspan.node().getComputedTextLength() > width) {
-              line.pop();
-              tspan.text(line.join(" "));
-              line = [word];
-              tspan = text
-                .append("tspan")
-                .attr("x", 0)
-                .attr("y", y)
-                .attr("dy", ++lineNumber * lineHeight + dy + "em")
-                .text(word);
-            }
-          }
-        });
-    });
+    .each((a) => wrap(a, x));
 
   chart.append("g").call(d3.axisLeft(y));
 }
