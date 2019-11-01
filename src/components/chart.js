@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Svg from "./svg";
-import LocalAuthority from './localAuthority';
+import LocalAuthority from "./localAuthority";
 import Dates from "./dates";
 import SiteOfLoan from "./siteOfLoan";
 import selectAllClick from "../helper/selectAllClick";
@@ -27,14 +27,17 @@ const Chart = ({ data }) => {
   // const siteOfLoans = ["All", ...uniqueValues["Site of loan"]];
   // const summedData = getSummed(data, uniqueValues);
   // const summedData = sumAll(data);
+  const LAs = data.map(o => o["Local authority"])
+  const [selectedLAs, setLAs] = useState(LAs[0])
+  
   useEffect(() => {
-    const chartData = data[0].values[0].values
-    const init = data[0]
+    const chartData = data[0].values[0].values;
+    const init = data[0];
     const options = {
-      localAuthority: init['Local authority'],
+      localAuthority: selectedLAs,
       dates: init.values[0].Dates,
-      siteOfLoan: 'All' 
-    }
+      siteOfLoan: "All"
+    };
     draw(data, options);
   });
 
@@ -61,15 +64,23 @@ const Chart = ({ data }) => {
   //     </div>
   //   </div>
   // );
-    return (
+  
+  const handleLAChange = arr => {
+    const selected = arr.map(x => x.value);
+    setLAs(selected)
+  }
+  
+  return (
     <div>
+      <div className="filter-wrapper">
+        <LocalAuthority options={LAs} onChange={handleLAChange}/>
+      </div>
       <div className="chart-wrapper">
-        <LocalAuthority 
         <Svg id="chart" />
       </div>
     </div>
   );
-  
+
   return null;
 };
 
