@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import Svg from "./svg";
-import SiteOfLoan from "./siteOfLoan";
+import LocalAuthority from './localAuthority';
 import Dates from "./dates";
+import SiteOfLoan from "./siteOfLoan";
 import selectAllClick from "../helper/selectAllClick";
 import draw from "../helper/draw";
 import "../style/chart.css";
@@ -63,6 +64,7 @@ const Chart = ({ data }) => {
     return (
     <div>
       <div className="chart-wrapper">
+        <LocalAuthority 
         <Svg id="chart" />
       </div>
     </div>
