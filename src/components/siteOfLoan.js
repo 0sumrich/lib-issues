@@ -1,8 +1,8 @@
 import React from "react";
-import Select from "./select";
+import MultiSelect from "./multiSelect";
 
 const SiteOfLoan = ({ options, onChange }) => (
-  <Select
+  <MultiSelect
     options={options}
     className="select-wrapper"
     defaultValue={options[0]}

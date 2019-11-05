@@ -1,26 +1,9 @@
 import * as d3 from "d3";
+import unpack from "./unpack";
 import wrap from "./wrap";
-
-function unpack(d, options) {
-  const { localAuthorities, dates, siteOfLoans } = options;
-  let res = [];
-  localAuthorities.forEach(la => {
-    const LAindex = d.map(o => o["Local authority"]).indexOf(la);
-    const datesIndex = d[LAindex].values.map(o => o.Dates).indexOf(dates);
-    const siteFilter = o => {
-      return (
-        siteOfLoans.includes(o["Site of loan"]) || siteOfLoans.includes("All")
-      );
-    };
-    const data = d[LAindex].values[datesIndex].values.filter(siteFilter);
-    res.push(...data);
-  });
-  return res;
-}
 
 function draw(d, options) {
   const data = unpack(d, options);
-
   d3.select("#chart")
     .selectAll("*")
     .remove();
@@ -35,6 +18,14 @@ function draw(d, options) {
     .range([0, width])
     .domain(data.map(o => o["Site of loan"]))
     .padding(0.1);
+
+  // const x = d3
+  //   .scaleLinear()
+  //   .range([0, width])
+  //   .domain([0, data.length]);
+
+  const xWidth = x.bandwidth();
+
   const y = d3
     .scaleLinear()
     .range([height, 0])
@@ -47,6 +38,19 @@ function draw(d, options) {
     .append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+  // chart
+  //   .selectAll(".bar")
+  //   .data(data)
+  //   .enter()
+  //   .append("rect")
+  //   .attr("class", "bar")
+  //   .attr("x", d => x(d["Site of loan"]))
+  //   .attr("width", x.bandwidth())
+  //   .attr("y", d => y(d.Issues))
+  //   .attr("height", d => height - y(d.Issues))
+  //   .style("fill", (d, i) => colours[i % colours.length])
+  //   .on("mouseover", d => console.log(d));
+
   chart
     .selectAll(".bar")
     .data(data)
@@ -54,21 +58,25 @@ function draw(d, options) {
     .append("rect")
     .attr("class", "bar")
     .attr("x", d => x(d["Site of loan"]))
-    .attr("width", x.bandwidth())
+    .attr("width", xWidth)
     .attr("y", d => y(d.Issues))
     .attr("height", d => height - y(d.Issues))
-    .style("fill", (d, i) => colours[i % colours.length]);
+    .style("fill", (d, i) => colours[i % colours.length])
+    .on("mouseover", d => console.log(d));
 
   // add the x Axis
+
+  const xAxis = d3.axisBottom(x).tickValues(data.map(o => o["Site of loan"]));
+
   chart
     .append("g")
     .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(x))
+    .call(xAxis)
     .each(function() {
       d3.select(this)
         .selectAll(".tick text")
         .each(function() {
-          wrap(d3.select(this), x.bandwidth() - 10);
+          wrap(d3.select(this), xWidth);
         });
     });
 

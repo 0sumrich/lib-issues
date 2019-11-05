@@ -1,8 +1,5 @@
 import { nest, sum } from "d3";
 
-const filterByDate = (arr, start, end) =>
-  arr.filter(o => o["Count start"] === start && o["Count end"] === end);
-
 // Data object keys from csv
 // Local authority,
 // Site of loan,
@@ -13,6 +10,7 @@ const filterByDate = (arr, start, end) =>
 // Issues
 
 const concatDates = o => o["Count start"] + " - " + o["Count end"];
+
 const sumAll = a => {
   let arr = []
   for(let i=0;i<a.length;i++){
@@ -40,15 +38,6 @@ const sumAll = a => {
         })
       };
     });
-};
-
-const getSummed = (data, uniqueValues) => {
-  const start = uniqueValues["Count start"][0];
-  const end = uniqueValues["Count end"][0];
-  const filtered = filterByDate(data, start, end);
-  const testData = sumAll(data);
-  debugger;
-  return sumAll(filtered);
 };
 
 export default sumAll;

@@ -1,15 +1,12 @@
 import React from "react";
-import Select from "./select";
-
-const concatDates = arr => arr.map(o => o.start + " - " + o.end);
+import MultiSelect from "./multiSelect";
 
 const Dates = ({ dates, onChange }) => {
-  const options = concatDates(dates);
   return (
-    <Select
-      options={options}
+    <MultiSelect
+      options={dates}
       className="select-wrapper"
-      defaultValue={options[0]}
+      defaultValue={dates[0]}
       placeholderButtonLabel={"Date Range"}
       onChange={onChange}
     />

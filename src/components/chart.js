@@ -5,6 +5,7 @@ import Dates from "./dates";
 import SiteOfLoan from "./siteOfLoan";
 import selectAllClick from "../helper/selectAllClick";
 import draw from "../helper/draw";
+import getSites from "../helper/getSites";
 import "../style/chart.css";
 
 // Data object keys from csv
@@ -16,61 +17,73 @@ import "../style/chart.css";
 // Book,
 // Issues
 
-//total loans by site
-
-// const fixDates = (start, end) => {
-
-// }
+const getDates = (data, LAs) => {
+  let res = [];
+  const dataLAs = data.map(o => o["Local authority"]);
+  for (let i = 0; i < LAs.length; i++) {
+    const la = LAs[i];
+    const target = data[dataLAs.indexOf(la)];
+    target.values.forEach(o => res.push(o.Dates));
+  }
+  return res;
+};
 
 const Chart = ({ data }) => {
-  // const uniqueValues = getUniqueValues(data);
-  // const siteOfLoans = ["All", ...uniqueValues["Site of loan"]];
-  // const summedData = getSummed(data, uniqueValues);
-  // const summedData = sumAll(data);
-  const LAs = data.map(o => o["Local authority"])
+  const LAs = data.map(o => o["Local authority"]);
+  const initLA = LAs[0];
+  const initDatesArr = getDates(data, [initLA]);
+  const initDates = initDatesArr[0];
   const [options, setOptions] = useState({
-    localAuthorities: [LAs[0]],
-    dates: data[0].values[0].Dates,
-    siteOfLoans: ['All']
-  })
-  
+    localAuthorities: [initLA],
+    dates: [initDates],
+    siteOfLoans: ["All"]
+  });
+
   useEffect(() => {
     draw(data, options);
   });
 
-  // const handleLoanSiteChange = arr => {
-  //   const selected = selectAllClick(arr).map(x => x.value);
-  //   if (selected.includes("All")) {
-  //     draw(summedData);
-  //   } else {
-  //     draw(summedData.filter(o => selected.includes(o["Site of loan"])));
-  //   }
-  // };
-
-  // return (
-  //   <div>
-  //     <div className="filter-wrapper">
-  //       <SiteOfLoan options={siteOfLoans} onChange={handleLoanSiteChange} />
-  //       <Dates
-  //         dates={uniqueValues["Dates"]}
-  //         onChange={arr => console.log(arr)}
-  //       />
-  //     </div>
-  //     <div className="chart-wrapper">
-  //       <Svg id="chart" />
-  //     </div>
-  //   </div>
-  // );
-  
   const handleLAChange = arr => {
     const selected = arr.map(x => x.value);
-    setOptions({...options, localAuthorities: selected})
-  }
-  
+    const newOptions = {
+      localAuthorities: selected,
+      dates: [getDates(data, selected)[0]],
+      siteOfLoans: options.siteOfLoans
+    };
+    setOptions(newOptions);
+    draw(data, newOptions);
+  };
+
+  const handleDateChange = arr => {
+    const selectedDates = arr.map(x => x.value);
+    const newOptions = {
+      ...options,
+      dates: selectedDates
+    };
+    setOptions(newOptions);
+    draw(data, newOptions);
+  };
+
+  const handleSitesChange = arr => {
+    const selectedSites = selectAllClick(arr).map(x => x.value);
+    const newOptions = options;
+    newOptions.siteOfLoans = selectedSites;
+    setOptions(newOptions);
+    draw(data, newOptions);
+  };
+
   return (
     <div>
       <div className="filter-wrapper">
-        <LocalAuthority options={LAs} onChange={handleLAChange}/>
+        <LocalAuthority options={LAs} onChange={handleLAChange} />
+        <Dates
+          dates={getDates(data, options.localAuthorities)}
+          onChange={handleDateChange}
+        />
+        <SiteOfLoan
+          options={getSites(data, options)}
+          onChange={handleSitesChange}
+        />
       </div>
       <div className="chart-wrapper">
         <Svg id="chart" />
