@@ -28,10 +28,10 @@ function unpack(d, options, filt=false) {
       };
       const data = filt
         ? d[LAindex].values[datesIndex].values.map(o => {
-            return { ...o, date: date, "Local authority": la };
+            return { ...o, Dates: date, "Local authority": la };
           })
         : d[LAindex].values[datesIndex].values.filter(siteFilter).map(o => {
-            return { ...o, date: date, "Local authority": la };
+            return { ...o, Dates: date, "Local authority": la };
           });
       res.push(...data);
     });
