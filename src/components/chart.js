@@ -6,9 +6,11 @@ import SiteOfLoan from "./siteOfLoan";
 import selectAllClick from "../helper/selectAllClick";
 import draw from "../helper/draw";
 import getSites from "../helper/getSites";
+import getDates from "../helper/getDates";
+import fixSelectedSites from "../helper/fixSelectedSites";
 import "../style/chart.css";
 
-// Data object keys from csv
+// Columns on csv
 // Local authority,
 // Site of loan,
 // Count start,
@@ -16,17 +18,6 @@ import "../style/chart.css";
 // Type,
 // Book,
 // Issues
-
-const getDates = (data, LAs) => {
-  let res = [];
-  const dataLAs = data.map(o => o["Local authority"]);
-  for (let i = 0; i < LAs.length; i++) {
-    const la = LAs[i];
-    const target = data[dataLAs.indexOf(la)];
-    target.values.forEach(o => res.push(o.Dates));
-  }
-  return res;
-};
 
 const Chart = ({ data }) => {
   const LAs = data.map(o => o["Local authority"]);
@@ -67,7 +58,7 @@ const Chart = ({ data }) => {
   const handleSitesChange = arr => {
     const selectedSites = selectAllClick(arr).map(x => x.value);
     const newOptions = options;
-    newOptions.siteOfLoans = selectedSites;
+    newOptions.siteOfLoans = fixSelectedSites(selectedSites);
     setOptions(newOptions);
     draw(data, newOptions);
   };
