@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/lib-issues/static/css/main.2680c0ba.chunk.css",
+    "main.js": "/lib-issues/static/js/main.7198bb97.chunk.js",
+    "main.js.map": "/lib-issues/static/js/main.7198bb97.chunk.js.map",
+    "runtime-main.js": "/lib-issues/static/js/runtime-main.3dd3899a.js",
+    "runtime-main.js.map": "/lib-issues/static/js/runtime-main.3dd3899a.js.map",
+    "static/css/2.2dab948c.chunk.css": "/lib-issues/static/css/2.2dab948c.chunk.css",
+    "static/js/2.b33fbf83.chunk.js": "/lib-issues/static/js/2.b33fbf83.chunk.js",
+    "static/js/2.b33fbf83.chunk.js.map": "/lib-issues/static/js/2.b33fbf83.chunk.js.map",
+    "index.html": "/lib-issues/index.html",
+    "precache-manifest.9ea1c0fa6127c12768a7fad584e06655.js": "/lib-issues/precache-manifest.9ea1c0fa6127c12768a7fad584e06655.js",
+    "service-worker.js": "/lib-issues/service-worker.js",
+    "static/css/2.2dab948c.chunk.css.map": "/lib-issues/static/css/2.2dab948c.chunk.css.map",
+    "static/css/main.2680c0ba.chunk.css.map": "/lib-issues/static/css/main.2680c0ba.chunk.css.map",
+    "static/media/issues.csv": "/lib-issues/static/media/issues.b44bac97.csv"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3dd3899a.js",
+    "static/css/2.2dab948c.chunk.css",
+    "static/js/2.b33fbf83.chunk.js",
+    "static/css/main.2680c0ba.chunk.css",
+    "static/js/main.7198bb97.chunk.js"
+  ]
+}
