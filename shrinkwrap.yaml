@@ -1,5 +1,6 @@
 dependencies:
   d3: 5.12.0
+  d3-tip: 0.9.1
   purecss: 1.0.1
   react: 16.10.2
   react-dom: 16.10.2
@@ -4029,6 +4030,15 @@ packages:
     dev: false
     resolution:
       integrity: sha512-rT34J5HnQUHhcLvhSB9GjCkN0Ddd5Y8nCwDBG2u6wQEeYxT/Lf51fTFFkldeib/sE/J0clIe0pnCfs6g/lRbyg==
+  /d3-tip/0.9.1:
+    dependencies:
+      d3-collection: 1.0.7
+      d3-selection: 1.4.0
+    dev: false
+    engines:
+      node: '>=4.2.6'
+    resolution:
+      integrity: sha512-EVBfG9d+HnjIoyVXfhpytWxlF59JaobwizqMX9EBXtsFmJytjwHeYiUs74ldHQjE7S9vzfKTx2LCtvUrIbuFYg==
   /d3-transition/1.2.0:
     dependencies:
       d3-color: 1.4.0
@@ -11533,6 +11543,7 @@ shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
   d3: ^5.12.0
+  d3-tip: ^0.9.1
   purecss: ^1.0.1
   react: ^16.10.2
   react-dom: ^16.10.2
