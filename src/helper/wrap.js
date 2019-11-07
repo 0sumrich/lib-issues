@@ -1,3 +1,5 @@
+import { selectAll } from "d3-selection";
+
 function wrap(text, width) {
   const words = text
     .text()
@@ -9,6 +11,7 @@ function wrap(text, width) {
   const lineHeight = 1.1; // ems
   const y = text.attr("y");
   const dy = +text.attr("dy").slice(0, -3);
+  let fontSize = 1;
   let tspan = text
     .text(null)
     .append("tspan")
@@ -28,6 +31,16 @@ function wrap(text, width) {
         .attr("y", y)
         .attr("dy", ++lineNumber * lineHeight + dy + "em")
         .text(word);
+      function fontSizeFix() {
+        if (tspan.node().getComputedTextLength() > width) {
+          fontSize = 0.99 * fontSize;
+          selectAll(".x-axis-text").style("font-size", `${fontSize}em`);
+          fontSizeFix();
+        } else {
+          return;
+        }
+      }
+      fontSizeFix();
     }
   }
 }

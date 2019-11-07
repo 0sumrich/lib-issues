@@ -4,9 +4,7 @@ export default arr => {
 		if (i === -1) {
 			return str;
 		} else {
-			const res = str.slice(0, i - 1);
-			debugger;
-			return res;
+			return str.slice(0, i - 1);
 		}
 	};
 

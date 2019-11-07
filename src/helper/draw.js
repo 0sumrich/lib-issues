@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 import unpack from "./unpack";
 import wrap from "./wrap";
+import tip from "./tooltip";
 
 function draw(d, options) {
   const data = unpack(d, options);
@@ -8,7 +9,7 @@ function draw(d, options) {
     .selectAll("*")
     .remove();
 
-  const margin = { top: 30, right: 30, bottom: 50, left: 40 };
+  const margin = { top: 40, right: 10, bottom: 90, left: 70 };
   const width = 1000 - margin.left - margin.right;
   const height = 600 - margin.top - margin.bottom;
   const colours = d3.schemeCategory10;
@@ -18,11 +19,6 @@ function draw(d, options) {
     .range([0, width])
     .domain(data.map(o => o["Site of loan"]))
     .padding(0.1);
-
-  // const x = d3
-  //   .scaleLinear()
-  //   .range([0, width])
-  //   .domain([0, data.length]);
 
   const xWidth = x.bandwidth();
 
@@ -38,18 +34,7 @@ function draw(d, options) {
     .append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-  // chart
-  //   .selectAll(".bar")
-  //   .data(data)
-  //   .enter()
-  //   .append("rect")
-  //   .attr("class", "bar")
-  //   .attr("x", d => x(d["Site of loan"]))
-  //   .attr("width", x.bandwidth())
-  //   .attr("y", d => y(d.Issues))
-  //   .attr("height", d => height - y(d.Issues))
-  //   .style("fill", (d, i) => colours[i % colours.length])
-  //   .on("mouseover", d => console.log(d));
+  chart.call(tip);
 
   chart
     .selectAll(".bar")
@@ -62,11 +47,10 @@ function draw(d, options) {
     .attr("y", d => y(d.Issues))
     .attr("height", d => height - y(d.Issues))
     .style("fill", (d, i) => colours[i % colours.length])
-    .on("mouseover", d => console.log(d));
+    .on("mouseover", tip.show)
+    .on("mouseout", tip.hide);
 
-  // add the x Axis
-
-  const xAxis = d3.axisBottom(x).tickValues(data.map(o => o["Site of loan"]));
+  const xAxis = d3.axisBottom(x); //.tickValues(data.map(o => o["Site of loan"]));
 
   chart
     .append("g")
@@ -75,12 +59,49 @@ function draw(d, options) {
     .each(function() {
       d3.select(this)
         .selectAll(".tick text")
+        .classed('x-axis-text', true)
         .each(function() {
           wrap(d3.select(this), xWidth);
         });
     });
 
   chart.append("g").call(d3.axisLeft(y));
+
+  chart
+    .append("text")
+    .attr("class", "legend")
+    .attr(
+      "transform",
+      `translate(${width / 2}, ${height + margin.bottom - 20})`
+    )
+    .attr("alignment-baseline", "middle")
+    .style("text-anchor", "middle")
+    .text("Site of loan");
+
+  chart
+    .append("text")
+    .attr("class", "legend")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left + 5)
+    .attr("x", 0 - height / 2)
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .text("Loans + renewals in a timeframe");
+
+  chart
+    .append("text")
+    .attr("class", "chart-title")
+    .attr("y", 0-0.25*margin.top)
+    .attr("x", width / 2)
+    .style("text-anchor", "middle")
+    .text("Issues + Renewals by Loan Site");
+  
+  // const ticktext = d3.selectAll('.tick text').each(function(){
+  //   const text = d3.select(this);
+  //   debugger;
+  // })
+  // const tspans = d3.selectAll('.tick text tspan')
+  // debugger;
 }
 
 export default draw;

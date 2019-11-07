@@ -1,10 +1,13 @@
 .chart-wrapper {
-  width: 100%
+  width: 100%;
+  margin: 1em 0;
 }
 
 .chart-wrapper svg {
   display: block;
   margin: auto;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
 }
 
 .select-wrapper {
@@ -15,5 +18,23 @@
 
 .filter-wrapper {
   width: fit-content;
-  margin: auto;
+  margin: 1em auto;
+  padding-bottom: 1em;
+}
+
+.bar {
+	cursor: pointer;
+}
+
+.bar:hover {
+	stroke: red;
+	stroke-width: 3;
+}
+
+.legend {
+  font-size: 0.8em;
+}
+
+.chart-title {
+  
 }
