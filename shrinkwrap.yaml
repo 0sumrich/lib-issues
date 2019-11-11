@@ -1,6 +1,7 @@
 dependencies:
   d3: 5.12.0
   d3-tip: 0.9.1
+  global: 4.4.0
   purecss: 1.0.1
   react: 16.10.2
   react-dom: 16.10.2
@@ -4360,6 +4361,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-sK3ujri04WyjwQXVoK4PU3y8ula1stq10GJZpqHIUgoGZdsGzAGu65BnU3d08aTVSvO7mGPZUc0wTEDL+qGE0Q==
+  /dom-walk/0.1.1:
+    dev: false
+    resolution:
+      integrity: sha1-ZyIm3HTI95mtNTB9+TaroRrNYBg=
   /domain-browser/1.2.0:
     dev: false
     engines:
@@ -5517,6 +5522,13 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-awConJSVCHVGND6x3tmMaKcQvwXLhjdkmomy2W+Goaui8YPgYgXJZewhg3fWC+DlfqqQuWg8AwqjGTD2nAPVWg==
+  /global/4.4.0:
+    dependencies:
+      min-document: 2.19.0
+      process: 0.11.10
+    dev: false
+    resolution:
+      integrity: sha512-wv/LAoHdRE3BeTGz53FAamhGlPLhlssK45usmGFThIi4XqnBmjKQ16u+RNbP7WvigRZDxUsM0J3gcQ5yicaL0w==
   /globals/11.12.0:
     dev: false
     engines:
@@ -7450,6 +7462,12 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==
+  /min-document/2.19.0:
+    dependencies:
+      dom-walk: 0.1.1
+    dev: false
+    resolution:
+      integrity: sha1-e9KC4/WELtKVu3SM3Z8f+iyCRoU=
   /mini-css-extract-plugin/0.8.0/webpack@4.41.0:
     dependencies:
       loader-utils: 1.2.3
@@ -11605,6 +11623,7 @@ specifiers:
   d3: ^5.12.0
   d3-tip: ^0.9.1
   gh-pages: ^2.1.1
+  global: ^4.4.0
   purecss: ^1.0.1
   react: ^16.10.2
   react-dom: ^16.10.2
